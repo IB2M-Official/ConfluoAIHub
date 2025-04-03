@@ -24,6 +24,9 @@
     <input type="text" id="user-input" placeholder="Pose ta question...">
     <button onclick="askAI()">Envoyer</button>
     <button onclick="clearChat()" style="background-color: red;">Effacer l'historique</button>
+    <footer>
+        <p>© 2024 ConfluoAiHub by ib2m_official</p>
+    </footer>
     
     <script>
         let messages = JSON.parse(localStorage.getItem("chatHistory")) || [];
