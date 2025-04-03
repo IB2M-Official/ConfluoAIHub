@@ -29,7 +29,7 @@ Aucun serveur ou base de données n'est nécessaire pour ce projet. Il suffit d'
 ### Étapes d'installation
 
 1. Clonez ce dépôt :
-   git clone https://github.com/ib2m_official/ConfluoAiHub.git
+   git clone https://github.com/IB2M-Official/ConfluoAIHub.git
 
 2. Accédez au répertoire du projet :
    cd ConfluoAiHub
