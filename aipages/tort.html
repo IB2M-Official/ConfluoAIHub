@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Qui Te Remet en Question</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <h1>IA Qui Te Remet en Question</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Pose ta question...">
+    <button onclick="askAI()">Envoyer</button>
+    <footer>
+        <p>© 2024 ConfluoAiHub by ib2m_official</p>
+    </footer>
+    
+    <script>
+        let messages = JSON.parse(localStorage.getItem('chatHistory')) || [];
+        const chatBox = document.getElementById("chat-box");
+        function updateChatBox() {
+            chatBox.innerHTML = messages.map(m => `<p><strong>${m.role === 'user' ? 'Toi' : 'IA'} :</strong> ${m.content}</p>`).join('');
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+        updateChatBox();
+        async function askAI() {
+            const userInput = document.getElementById("user-input").value;
+            if (!userInput) return;
+            messages.push({ role: "user", content: userInput });
+            updateChatBox();
+            document.getElementById("user-input").value = "";
+            const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer CjVcFT9mRjOtTqG7er5Z5uYe4Y6h2yjU"
+                },
+                body: JSON.stringify({
+                    model: "mistral-medium",
+                    messages: [...messages, { role: "user", content: `Réponds à cette question '${userInput}', mais remets toujours en question la réponse. Parfois, donne une réponse fausse avec confiance.` }],
+                    temperature: 1.2
+                })
+            });
+            const data = await response.json();
+            const aiResponse = data.choices?.[0]?.message?.content || "Hmm... et si tu avais tort ?";
+            messages.push({ role: "assistant", content: aiResponse });
+            localStorage.setItem('chatHistory', JSON.stringify(messages));
+            updateChatBox();
+        }
+    </script>
+</body>
+</html>
