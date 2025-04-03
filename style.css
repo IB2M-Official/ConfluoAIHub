@@ -1,0 +1,146 @@
+/* style.css */
+
+/* Importation de la police Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Réinitialisation des marges et des paddings pour une cohérence sur tous les navigateurs */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Style général du corps de la page */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 1100px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* En-tête */
+header {
+    background: #35424a;
+    color: #ffffff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #e8491d 3px solid;
+}
+
+header a {
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+/* Navigation */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+/* Boutons */
+.button {
+    display: inline-block;
+    font-size: 18px;
+    color: #ffffff;
+    background: #e8491d;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background: #333;
+    transform: scale(1.1);
+}
+
+/* Cartes IA */
+.ai-card {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 20px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ai-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.ai-card img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Effet de survol pour les liens */
+a {
+    color: #e8491d;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #333;
+}
+
+/* Effet de clic pour les boutons */
+.button:active {
+    background: #555;
+    transform: scale(0.9);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #35424a;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+/* Transitions de page */
+.page-enter {
+    opacity: 0;
+    transform: translateY(-20px);
+}
+
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.page-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.page-exit-active {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
