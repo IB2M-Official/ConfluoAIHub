@@ -1,146 +1,245 @@
-/* style.css */
-
-/* Importation de la police Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-
-/* Réinitialisation des marges et des paddings pour une cohérence sur tous les navigateurs */
+/* Global Styles */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Style général du corps de la page */
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
-    line-height: 1.6;
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
     padding: 20px;
-    transition: background-color 0.3s ease;
-}
-
-/* Conteneur principal */
-.container {
-    max-width: 1100px;
-    margin: auto;
-    overflow: hidden;
-    padding: 0 20px;
-}
-
-/* En-tête */
-header {
-    background: #35424a;
-    color: #ffffff;
-    padding-top: 30px;
-    min-height: 70px;
-    border-bottom: #e8491d 3px solid;
-}
-
-header a {
-    color: #ffffff;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 16px;
-}
-
-/* Navigation */
-nav {
+    min-height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    transition: background-color 0.3s ease-in-out;
 }
 
-nav ul {
-    list-style: none;
+/* Main content styles */
+.container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
 }
 
-nav ul li {
-    margin-left: 20px;
-}
-
-/* Boutons */
-.button {
-    display: inline-block;
-    font-size: 18px;
-    color: #ffffff;
-    background: #e8491d;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-
-.button:hover {
-    background: #333;
-    transform: scale(1.1);
-}
-
-/* Cartes IA */
-.ai-card {
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    margin: 20px;
-    padding: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.ai-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.ai-card img {
-    max-width: 100%;
-    border-radius: 10px;
-}
-
-/* Effet de survol pour les liens */
-a {
-    color: #e8491d;
+/* Header */
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #fff;
     transition: color 0.3s ease;
 }
 
-a:hover {
-    color: #333;
+h1:hover {
+    color: #007acc;
 }
 
-/* Effet de clic pour les boutons */
-.button:active {
-    background: #555;
-    transform: scale(0.9);
+/* Chat Box Styles */
+#chat-box {
+    width: 80%;
+    max-width: 800px;
+    height: 300px;
+    overflow-y: scroll;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+/* Message Styling */
+.message {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s forwards;
+    margin-bottom: 15px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+strong {
+    color: #007acc;
+}
+
+/* Input and Button */
+input,
+button {
+    padding: 12px;
+    border-radius: 8px;
+    margin: 5px;
+    font-size: 1rem;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+input {
+    width: 70%;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #555;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #007acc;
+}
+
+button {
+    width: 20%;
+    background-color: #007acc;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #005f99;
+    transform: scale(1.1);
+}
+
+/* Hover Effects */
+button:active {
+    background-color: #003f66;
+}
+
+/* Transition page change */
+html, body {
+    transition: background-color 0.5s ease;
 }
 
 /* Footer */
 footer {
+    background-color: #111;
+    color: #888;
+    padding: 10px 20px;
     text-align: center;
+    font-size: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Page Styling for IA pages */
+.ia-container {
+    width: 80%;
+    max-width: 1000px;
+    margin: 20px auto;
     padding: 20px;
-    background: #35424a;
-    color: #ffffff;
+    background-color: #2a2a2a;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.ia-container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #007acc;
+}
+
+/* IA Chat Container */
+.ia-chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+.ia-message {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeIn 0.5s forwards;
+    margin-bottom: 15px;
+}
+
+.ia-input {
+    padding: 12px;
+    width: 70%;
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 8px;
+    margin: 5px;
+}
+
+.ia-button {
+    padding: 12px;
+    background-color: #007acc;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.ia-button:hover {
+    background-color: #005f99;
+    transform: scale(1.1);
+}
+
+/* IA Navigation and Option Buttons */
+.ia-options {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
 
-/* Transitions de page */
-.page-enter {
-    opacity: 0;
-    transform: translateY(-20px);
+.ia-option {
+    background-color: #444;
+    color: white;
+    padding: 15px 25px;
+    margin: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.page-enter-active {
-    opacity: 1;
-    transform: translateY(0);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+.ia-option:hover {
+    background-color: #007acc;
+    transform: scale(1.05);
 }
 
-.page-exit {
-    opacity: 1;
-    transform: translateY(0);
+.ia-option:active {
+    background-color: #005f99;
+    transform: scale(1);
 }
 
-.page-exit-active {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+/* Transition for page change */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Button to clear conversation */
+.clear-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.clear-button:hover {
+    background-color: #c9302c;
+    transform: scale(1.1);
+}
+
+.clear-button:active {
+    background-color: #ac2925;
 }
