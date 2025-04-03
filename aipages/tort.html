@@ -11,6 +11,7 @@
     <div id="chat-box"></div>
     <input type="text" id="user-input" placeholder="Pose ta question...">
     <button onclick="askAI()">Envoyer</button>
+    <button onclick="clearChat()">Effacer</button>
     <footer>
         <p>© 2024 ConfluoAiHub by ib2m_official</p>
     </footer>
@@ -38,13 +39,18 @@
                 body: JSON.stringify({
                     model: "mistral-medium",
                     messages: [...messages, { role: "user", content: `Réponds à cette question '${userInput}', mais remets toujours en question la réponse. Parfois, donne une réponse fausse avec confiance.` }],
-                    temperature: 1.2
+                    temperature: 0.9
                 })
             });
             const data = await response.json();
             const aiResponse = data.choices?.[0]?.message?.content || "Hmm... et si tu avais tort ?";
             messages.push({ role: "assistant", content: aiResponse });
             localStorage.setItem('chatHistory', JSON.stringify(messages));
+            updateChatBox();
+        }
+        function clearChat() {
+            messages = [];
+            localStorage.removeItem('chatHistory');
             updateChatBox();
         }
     </script>
