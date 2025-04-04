@@ -4,32 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IA Qui Te Remet en Question</title>
-    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../style.css"> <!-- Assurez-vous d'avoir le bon chemin -->
 </head>
 <body>
     <h1>IA Qui Te Remet en Question</h1>
-    <div id="chat-box"></div>
-    <input type="text" id="user-input" placeholder="Pose ta question...">
-    <button onclick="askAI()">Envoyer</button>
-    <button onclick="clearChat()">Effacer</button>
+    <div id="chat-box" class="chat-box"></div> <!-- Ajout de la classe -->
+    <input type="text" id="user-input" class="user-input" placeholder="Pose ta question...">
+    <button onclick="askAI()" class="button">Envoyer</button>
+    <button onclick="clearChat()" class="button clear-button">Effacer</button>
     <footer>
         <p>© 2025 ConfluoAiHub by ib2m_official</p>
     </footer>
-    
+
     <script>
         let messages = JSON.parse(localStorage.getItem('chatHistory')) || [];
         const chatBox = document.getElementById("chat-box");
+
         function updateChatBox() {
             chatBox.innerHTML = messages.map(m => `<p><strong>${m.role === 'user' ? 'Toi' : 'IA'} :</strong> ${m.content}</p>`).join('');
             chatBox.scrollTop = chatBox.scrollHeight;
         }
+
         updateChatBox();
+        
         async function askAI() {
             const userInput = document.getElementById("user-input").value;
             if (!userInput) return;
+
             messages.push({ role: "user", content: userInput });
             updateChatBox();
             document.getElementById("user-input").value = "";
+            
             const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
                 method: "POST",
                 headers: {
@@ -42,12 +47,15 @@
                     temperature: 0.9
                 })
             });
+            
             const data = await response.json();
             const aiResponse = data.choices?.[0]?.message?.content || "Hmm... et si tu avais tort ?";
+            
             messages.push({ role: "assistant", content: aiResponse });
             localStorage.setItem('chatHistory', JSON.stringify(messages));
             updateChatBox();
         }
+        
         function clearChat() {
             messages = [];
             localStorage.removeItem('chatHistory');
