@@ -131,17 +131,17 @@
               html = html.replace(jsMatch[0], '<script src="script.js"></script>');
           }
       
-          zip.file("index.html", html);
+              zip.file("index.html", html);
       
-          zip.generateAsync({ type: "blob" }).then(function (blob) {
-              const link = document.createElement("a");
-              link.href = URL.createObjectURL(blob);
-              link.download = "site_ia.zip";
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-          });
-      }
+              zip.generateAsync({ type: "blob" }).then(function (blob) {
+                  const link = document.createElement("a");
+                  link.href = URL.createObjectURL(blob);
+                  link.download = "site_ia.zip";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+              });
+          }
 
       
     </script>
