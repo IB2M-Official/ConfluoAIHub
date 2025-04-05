@@ -1,5 +1,4 @@
 # ConfluoAIHub
-Voici le **README** formaté dans un canevas propre et simple à lire et copier :
 
 # ConfluoAiHub by ib2m_official
 
@@ -75,7 +74,7 @@ SOFTWARE.
 
 ## Contact
 
-Pour toute question ou suggestion, vous pouvez me contacter via [ib2m.morel@gmail.com] ou directement sur [GitHub](https://github.com/IB2M-Official).
+Pour toute question ou suggestion, vous pouvez me contacter via [email](ib2m.morel@gmail.com) ou directement sur [GitHub](https://github.com/IB2M-Official).
 
 
 
