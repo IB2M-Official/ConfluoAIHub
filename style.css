@@ -71,3 +71,36 @@ footer {
     font-size: 0.9em;
     color: #ccc;
 }
+
+#button-row {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.download-button {
+  background-color: #00b894;
+}
+.download-button:hover {
+  background-color: #009f7a;
+  transform: scale(1.05);
+}
+
+.open-button {
+  background-color: #0984e3;
+}
+.open-button:hover {
+  background-color: #0652dd;
+  transform: scale(1.05);
+}
+
+.zip-button {
+  background-color: #6c5ce7;
+}
+.zip-button:hover {
+  background-color: #4834d4;
+  transform: scale(1.05);
+}
+
