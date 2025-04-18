@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Assistant IA Ilerio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>Assistant IA du groupe Ilerio</h1>
+
+  <div id="chat-box" class="chat-box"></div>
+  <input type="text" id="user-input" class="user-input" placeholder="Pose ta question à Ilerio...">
+  <button id="send-btn" class="button">Envoyer</button>
+  <button id="clear-btn" class="button clear-button">Effacer</button>
+
+  <footer>
+    <p>© 2025 Groupe Ilerio — Bot développé par ib2m</p>
+  </footer>
+
+  <script>
+    const chatBox = document.getElementById("chat-box");
+    const userInput = document.getElementById("user-input");
+
+    let messages = JSON.parse(localStorage.getItem("chatIlerio")) || [];
+
+    // 📌 Base de connaissances sur Ilerio
+    const knowledgeBase = [
+      {
+        question: "Qu'est-ce qu'Ilerio Graphisme ?",
+        answer: "Ilerio Graphisme est le premier serveur Discord de graphisme 100% gratuit, reposant sur un système d’échange basé sur une monnaie fictive : les Ileriocoins."
+      },
+      {
+        question: "Comment obtenir des Ileriocoins ?",
+        answer: "Les Ileriocoins peuvent être obtenus grâce à 12 méthodes gratuites ou via 2 moyens payants."
+      },
+      {
+        question: "Quels services sont proposés ?",
+        answer: "Des services de qualité fournis par des graphistes, modélisateurs et monteurs, classés en trois catégories selon leur niveau."
+      },
+      {
+        question: "Qui est ib2m ?",
+        answer: "ib2m est le développeur officiel du bot et membre fondateur d’Ilerio."
+      },
+      {
+        question: "Comment contacter le support ?",
+        answer: "En cas de besoin, vous pouvez contacter l’administration d’Ilerio Graphisme via notre mail officiel : Support@ilerio.fr"
+      },
+      {
+        question: "Où trouver le serveur Discord ?",
+        answer: "Voici le lien vers notre serveur Discord : https://discord.com/invite/MMsYwvuCGP"
+      }
+    ];
+
+    function updateChatBox() {
+      chatBox.innerHTML = messages
+        .map(m => `<p class="message"><strong>${m.role === "user" ? "Toi" : "IlerioBot"} :</strong> ${m.content}</p>`)
+        .join("");
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    async function askAI() {
+      const input = userInput.value.trim();
+      if (!input) return;
+
+      messages.push({ role: "user", content: input });
+      updateChatBox();
+      userInput.value = "";
+
+      // 📝 Intégration de la base de connaissances dans le prompt
+      let baseKnowledgeText = knowledgeBase.map(item => `Q: ${item.question}\nR: ${item.answer}`).join('\n\n');
+
+      const prompt = `Voici quelques informations à propos du groupe Ilerio :\n${baseKnowledgeText}\n\nMaintenant réponds à cette question utilisateur : "${input}" de façon naturelle et pertinente.`;
+
+      const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer CjVcFT9mRjOtTqG7er5Z5uYe4Y6h2yjU"
+        },
+        body: JSON.stringify({
+          model: "mistral-medium",
+          messages: [
+            ...messages.map(m => ({ role: m.role === 'user' ? 'user' : 'assistant', content: m.content })),
+            { role: "user", content: prompt }
+          ],
+          temperature: 0.8
+        })
+      });
+
+      const data = await response.json();
+      const aiResponse = data.choices?.[0]?.message?.content || "Hmm... je ne suis pas sûr de cette réponse.";
+
+      messages.push({ role: "assistant", content: aiResponse });
+      localStorage.setItem("chatIlerio", JSON.stringify(messages));
+      updateChatBox();
+    }
+
+    function clearChat() {
+      messages = [];
+      localStorage.removeItem("chatIlerio");
+      chatBox.innerHTML = "";
+    }
+
+    // Événements
+    document.getElementById("send-btn").onclick = askAI;
+    document.getElementById("clear-btn").onclick = clearChat;
+
+    // Initialisation
+    updateChatBox();
+  </script>
+</body>
+</html>
